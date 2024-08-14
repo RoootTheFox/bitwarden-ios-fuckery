@@ -46,6 +46,7 @@ class MockStateService: StateService { // swiftlint:disable:this type_body_lengt
     var lastSyncTimeSubject = CurrentValueSubject<Date?, Never>(nil)
     var lastUserShouldConnectToWatch = false
     var masterPasswordHashes = [String: String]()
+    var needsVaultUnlockSetup = [String: Bool]()
     var notificationsLastRegistrationDates = [String: Date]()
     var notificationsLastRegistrationError: Error?
     var passwordGenerationOptions = [String: PasswordGenerationOptions]()
@@ -226,6 +227,11 @@ class MockStateService: StateService { // swiftlint:disable:this type_body_lengt
     func getMasterPasswordHash(userId: String?) async throws -> String? {
         let userId = try unwrapUserId(userId)
         return masterPasswordHashes[userId]
+    }
+
+    func getNeedsVaultUnlockSetup(userId: String?) async throws -> Bool {
+        let userId = try unwrapUserId(userId)
+        return needsVaultUnlockSetup[userId] ?? false
     }
 
     func getNotificationsLastRegistrationDate(userId: String?) async throws -> Date? {
@@ -411,6 +417,11 @@ class MockStateService: StateService { // swiftlint:disable:this type_body_lengt
     func setMasterPasswordHash(_ hash: String?, userId: String?) async throws {
         let userId = try unwrapUserId(userId)
         masterPasswordHashes[userId] = hash
+    }
+
+    func setNeedsVaultUnlockSetup(_ needsVaultUnlockSetup: Bool, userId: String?) async throws {
+        let userId = try unwrapUserId(userId)
+        self.needsVaultUnlockSetup[userId] = needsVaultUnlockSetup
     }
 
     func setNotificationsLastRegistrationDate(_ date: Date?, userId: String?) async throws {

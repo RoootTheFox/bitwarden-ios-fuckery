@@ -45,6 +45,8 @@ class VaultUnlockSetupProcessor: StateProcessor<VaultUnlockSetupState, VaultUnlo
 
     override func perform(_ effect: VaultUnlockSetupEffect) async {
         switch effect {
+        case .continueFlow:
+            await continueFlow()
         case .loadData:
             await loadData()
         }
@@ -52,12 +54,8 @@ class VaultUnlockSetupProcessor: StateProcessor<VaultUnlockSetupState, VaultUnlo
 
     override func receive(_ action: VaultUnlockSetupAction) {
         switch action {
-        case .continueFlow:
-            // TODO: PM-10278 Navigate to autofill setup
-            break
         case .setUpLater:
-            // TODO: PM-10270 Skip unlock setup
-            break
+            showSetUpLaterAlert()
         case let .toggleUnlockMethod(unlockMethod, newValue):
             Task {
                 switch unlockMethod {
@@ -72,6 +70,17 @@ class VaultUnlockSetupProcessor: StateProcessor<VaultUnlockSetupState, VaultUnlo
 
     // MARK: Private
 
+    /// Continues the set up unlock flow by navigating to autofill setup.
+    ///
+    private func continueFlow() async {
+        do {
+            try await services.stateService.setNeedsVaultUnlockSetup(false)
+        } catch {
+            services.errorReporter.log(error: error)
+        }
+        coordinator.navigate(to: .autofillSetup)
+    }
+
     /// Load any initial data for the view.
     ///
     private func loadData() async {
@@ -81,6 +90,15 @@ class VaultUnlockSetupProcessor: StateProcessor<VaultUnlockSetupState, VaultUnlo
             services.errorReporter.log(error: error)
             coordinator.showAlert(.defaultAlert(title: Localizations.anErrorHasOccurred))
         }
+    }
+
+    /// Shows the alert confirming that the user wants to proceed without setting up their unlock
+    /// methods.
+    ///
+    private func showSetUpLaterAlert() {
+        coordinator.showAlert(.setUpUnlockMethodLater {
+            self.coordinator.navigate(to: .autofillSetup)
+        })
     }
 
     /// Toggles whether unlock with biometrics is enabled.
