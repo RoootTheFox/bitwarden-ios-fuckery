@@ -131,40 +131,6 @@ jobs:
           sudo installer -pkg yeetd-normal.pkg -target /
           yeetd &
 
-      - name: Log in to Azure
-        uses: Azure/login@cb79c773a3cfa27f31f25eb3f677781210c9ce3d # v1.6.1
-        with:
-          creds: ${{ secrets.AZURE_KV_CI_SERVICE_PRINCIPAL }}
-
-      - name: Retrieve secrets
-        uses: bitwarden/gh-actions/get-keyvault-secrets@main
-        with:
-          keyvault: "bitwarden-ci"
-          secrets: "appcenter-ios-token"
-
-      - name: Retrieve production provisioning profiles
-        if: env.BUILD_VARIANT == 'Production'
-        env:
-          ACCOUNT_NAME: bitwardenci
-          CONTAINER_NAME: profiles
-        run: |
-          mkdir -p $HOME/secrets
-          profiles=(
-            "dist_autofill.mobileprovision"
-            "dist_bitwarden.mobileprovision"
-            "dist_extension.mobileprovision"
-            "dist_share_extension.mobileprovision"
-            "dist_bitwarden_watch_app.mobileprovision"
-            "dist_bitwarden_watch_app_extension.mobileprovision"
-            "dist_bitwarden_watch_widget_extension.mobileprovision"
-          )
-
-          for FILE in "${profiles[@]}"
-          do
-            az storage blob download --account-name $ACCOUNT_NAME --container-name $CONTAINER_NAME --name $FILE \
-              --file $HOME/secrets/$FILE --output none
-          done
-
       - name: Retrieve beta provisioning profiles
         if: env.BUILD_VARIANT == 'Beta'
         env:
@@ -187,31 +153,6 @@ jobs:
             az storage blob download --account-name $ACCOUNT_NAME --container-name $CONTAINER_NAME --name $FILE \
               --file $HOME/secrets/$FILE --output none
           done
-
-      - name: Retrieve production Google Services secret
-        if: env.BUILD_VARIANT == 'Production'
-        env:
-          ACCOUNT_NAME: bitwardenci
-          CONTAINER_NAME: mobile
-          SOURCE_FILE: GoogleService-Info.plist
-          TARGET_FILE: GoogleService-Info.plist
-        run: |
-          mkdir -p $HOME/secrets
-          az storage blob download --account-name $ACCOUNT_NAME --container-name $CONTAINER_NAME --name $SOURCE_FILE \
-            --file Bitwarden/Application/Support/$TARGET_FILE --output none
-
-      - name: Retrieve watch production Google Services secret
-        if: env.BUILD_VARIANT == 'Production'
-        env:
-          ACCOUNT_NAME: bitwardenci
-          CONTAINER_NAME: mobile
-          SOURCE_FILE: GoogleService-Info.plist
-          TARGET_FILE: GoogleService-Info.plist
-        run: |
-          mkdir -p $HOME/secrets
-          az storage blob download --account-name $ACCOUNT_NAME --container-name $CONTAINER_NAME --name $SOURCE_FILE \
-            --file BitwardenWatchApp/$TARGET_FILE --output none
-          plutil -replace BUNDLE_ID -string com.8bit.bitwarden.watchkitapp BitwardenWatchApp/$TARGET_FILE
 
       - name: Retrieve beta Google Services secret
         if: env.BUILD_VARIANT == 'Beta'
@@ -243,16 +184,6 @@ jobs:
           mkdir -p $HOME/certificates
           az keyvault secret show --id https://bitwarden-ci.vault.azure.net/certificates/ios-distribution |
             jq -r .value | base64 -d > $HOME/certificates/ios-distribution.p12
-
-      - name: Download Fastlane credentials
-        env:
-          ACCOUNT_NAME: bitwardenci
-          CONTAINER_NAME: mobile
-          FILE: appstoreconnect-fastlane.json
-        run: |
-          mkdir -p $HOME/secrets
-          az storage blob download --account-name $ACCOUNT_NAME --container-name $CONTAINER_NAME --name $FILE \
-            --file $HOME/secrets/$FILE --output none
 
       - name: Configure Keychain Access
         env:
