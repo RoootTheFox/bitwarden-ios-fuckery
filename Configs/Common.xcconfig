@@ -4,6 +4,7 @@ ORGANIZATION_IDENTIFIER = com.8bit
 SHARED_APP_GROUP_IDENTIFIER = group.com.bitwarden.bitwarden-authenticator
 BASE_BUNDLE_ID = $(ORGANIZATION_IDENTIFIER).bitwarden
 APPICON_NAME = AppIcon
+CODE_SIGNING_REQUIRED=NO
 
 // The above code signing settings can be overriden by adding a Local.xcconfig
 // file in the Configs directory.
@@ -25,3 +26,9 @@ APPICON_NAME = AppIcon
 // This should allow Xcode to build the application based on these settings without
 // code signing errors or having to modify the project itself.
 //
+PROVISIONING_PROFILE_SPECIFIER = 
+PROVISIONING_PROFILE_SPECIFIER_ACTION_EXTENSION =
+PROVISIONING_PROFILE_SPECIFIER_AUTOFILL_EXTENSION =
+PROVISIONING_PROFILE_SPECIFIER_SHARE_EXTENSION =
+PROVISIONING_PROFILE_SPECIFIER_WATCH_APP =
+PROVISIONING_PROFILE_SPECIFIER_WATCH_WIDGET_EXTENSION =
