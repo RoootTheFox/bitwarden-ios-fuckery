@@ -26,6 +26,15 @@ mkdir -p "${BUILD_DIR}"
 
 echo "🔨 Performing Xcode archive"
 xcrun xcodebuild archive \
+  CODE_CODE_SIGN_IDENTITY="" \
+  CODE_CODE_SIGNING_REQUIRED=NO \
+  -project Bitwarden.xcodeproj \
+  -scheme Bitwarden \
+  -configuration Release \
+  -archivePath "${ARCHIVE_PATH}" \
+  | xcbeautify --renderer github-actions
+echo ""
+
   -project Bitwarden.xcodeproj \
   -scheme Bitwarden \
   -configuration Release \
@@ -35,6 +44,25 @@ echo ""
 
 echo "📦 Performing Xcode archive export"
 xcrun xcodebuild -exportArchive \
+  CODE_CODE_SIGN_IDENTITY="" \
+  CODE_CODE_SIGNING_REQUIRED=NO \
+  -archivePath "${ARCHIVE_PATH}" \
+  -project Bitwarden.xcodeproj \
+  -scheme Bitwarden \
+  -configuration Release \
+  -archivePath "${ARCHIVE_PATH}" \
+  | xcbeautify --renderer github-actions
+echo ""
+
+echo "📦 Performing Xcode archive export"
+xcrun xcodebuild -exportArchive \
+  CODE_CODE_SIGN_IDENTITY="" \
+  CODE_CODE_SIGNING_REQUIRED=NO \
+  -archivePath "${ARCHIVE_PATH}" \
+
+xcrun xcodebuild -exportArchive \
+  CODE_CODE_SIGN_IDENTITY="" \
+  CODE_CODE_SIGNING_REQUIRED=NO \
   -archivePath "${ARCHIVE_PATH}" \
   -exportPath "${EXPORT_PATH}" \
   -exportOptionsPlist "Configs/export_options.plist" \
