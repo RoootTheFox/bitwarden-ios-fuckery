@@ -69,7 +69,7 @@ cat << EOF > ${export_options_file}
 <dict>
     <key>method</key>
     <string>app-store</string>
-<!--    <key>provisioningProfiles</key>
+    <key>provisioningProfiles</key>
     <dict>
         <key>${ios_bundle_id}</key>
         <string>${profile_prefix} Bitwarden</string>
@@ -83,7 +83,7 @@ cat << EOF > ${export_options_file}
         <string>${profile_prefix} Bitwarden Watch App</string>
         <key>${ios_bundle_id}.watchkitapp.widget-extension</key>
         <string>${profile_prefix} Bitwarden Watch Widget Extension</string>
-    </dict>-->
+    </dict>
     <key>manageAppVersionAndBuildNumber</key>
     <false/>
 </dict>
