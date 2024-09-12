@@ -7,7 +7,7 @@
 #   $ ./configure_provisioning_profiles.sh <variant>
 
 set -euo pipefail
-
+exit 0
 bold=$(tput -T ansi bold)
 normal=$(tput -T ansi sgr0)
 
