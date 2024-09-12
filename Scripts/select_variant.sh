@@ -41,19 +41,26 @@ esac
 
 cat << EOF > ${local_xcconfig_file}
 CODE_SIGN_STYLE = Manual
-CODE_SIGN_IDENTITY = Apple Distribution
-DEVELOPMENT_TEAM = LTZ2PFU5D6
+CODE_SIGN_IDENTITY =
+CODE_SIGNING_REQUIRED = NO
+DEVELOPMENT_TEAM =
 ORGANIZATION_IDENTIFIER = com.8bit
 BASE_BUNDLE_ID = ${ios_bundle_id}
 SHARED_APP_GROUP_IDENTIFIER = ${shared_app_group_id}
 APPICON_NAME = ${app_icon}
-PROVISIONING_PROFILE_SPECIFIER = ${profile_prefix} Bitwarden
-PROVISIONING_PROFILE_SPECIFIER_ACTION_EXTENSION = ${profile_prefix} Extension
-PROVISIONING_PROFILE_SPECIFIER_AUTOFILL_EXTENSION = ${profile_prefix} Autofill
-PROVISIONING_PROFILE_SPECIFIER_SHARE_EXTENSION = ${profile_prefix} Share Extension
-PROVISIONING_PROFILE_SPECIFIER_WATCH_APP = ${profile_prefix} Bitwarden Watch App
-PROVISIONING_PROFILE_SPECIFIER_WATCH_WIDGET_EXTENSION = ${profile_prefix} Bitwarden Watch Widget Extension
+PROVISIONING_PROFILE_SPECIFIER =
+PROVISIONING_PROFILE_SPECIFIER_ACTION_EXTENSION =
+PROVISIONING_PROFILE_SPECIFIER_AUTOFILL_EXTENSION =
+PROVISIONING_PROFILE_SPECIFIER_SHARE_EXTENSION =
+PROVISIONING_PROFILE_SPECIFIER_WATCH_APP =
+PROVISIONING_PROFILE_SPECIFIER_WATCH_WIDGET_EXTENSION =
 EOF
+#PROVISIONING_PROFILE_SPECIFIER = ${profile_prefix} Bitwarden
+#PROVISIONING_PROFILE_SPECIFIER_ACTION_EXTENSION = ${profile_prefix} Extension
+#PROVISIONING_PROFILE_SPECIFIER_AUTOFILL_EXTENSION = ${profile_prefix} Autofill
+#PROVISIONING_PROFILE_SPECIFIER_SHARE_EXTENSION = ${profile_prefix} Share Extension
+#PROVISIONING_PROFILE_SPECIFIER_WATCH_APP = ${profile_prefix} Bitwarden Watch App
+#PROVISIONING_PROFILE_SPECIFIER_WATCH_WIDGET_EXTENSION = ${profile_prefix} Bitwarden Watch Widget Extension
 
 cat << EOF > ${export_options_file}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -62,7 +69,7 @@ cat << EOF > ${export_options_file}
 <dict>
     <key>method</key>
     <string>app-store</string>
-    <key>provisioningProfiles</key>
+<!--    <key>provisioningProfiles</key>
     <dict>
         <key>${ios_bundle_id}</key>
         <string>${profile_prefix} Bitwarden</string>
@@ -76,7 +83,7 @@ cat << EOF > ${export_options_file}
         <string>${profile_prefix} Bitwarden Watch App</string>
         <key>${ios_bundle_id}.watchkitapp.widget-extension</key>
         <string>${profile_prefix} Bitwarden Watch Widget Extension</string>
-    </dict>
+    </dict>-->
     <key>manageAppVersionAndBuildNumber</key>
     <false/>
 </dict>
