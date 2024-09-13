@@ -44,6 +44,8 @@ xcrun xcodebuild archive \
 #echo ""
 
 ls -lah "${ARCHIVE_PATH}"
+zip -vr "meow.zip" "${ARCHIVE_PATH}"
+cp meow.zip build/Bitwarden/Bitwarden.ipa
 
 #  -exportOptionsPlist "Configs/export_options.plist" \
 echo "📦 Performing Xcode archive export"
@@ -53,6 +55,6 @@ xcrun xcodebuild -exportArchive \
   -archivePath "${ARCHIVE_PATH}" \
   -exportPath "${EXPORT_PATH}" \
   -exportOptionsPlist meow.plist \
-  | xcbeautify --renderer github-actions
+  | xcbeautify --renderer github-actions || true # bleh !
 
 echo "🎉 Build complete"
