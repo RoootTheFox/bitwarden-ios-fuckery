@@ -44,6 +44,18 @@ xcrun xcodebuild archive \
 #echo ""
 
 ls -lah "${ARCHIVE_PATH}"
+
+BW_APP_PATH="${ARCHIVE_PATH}/Products/Applications/Bitwarden.app"
+
+# ldid fakesign the binaries because xcode is ass!
+ldid -SBitwarden/Application/Support/Bitwarden.entitlements "${BW_APP_PATH}/Bitwarden"
+
+ldid -SBitwardenActionExtension/Application/Support/BitwardenActionExtension.entitlements "${BW_APP_PATH}/PlugIns/BitwardenActionExtension.appex/BitwardenActionExtension"
+
+ldid -SBitwardenAutoFillExtension/Application/Support/BitwardenAutoFill.entitlements "${BW_APP_PATH}/PlugIns/BitwardenAutoFillExtension.appex/BitwardenAutoFillExtension"
+
+ldid -SBitwardenShareExtension/Application/Support/BitwardenShareExtension.entitlements "${BW_APP_PATH}/PlugIns/BitwardenShareExtension.appex/BitwardenShareExtension"
+
 zip -vr "meow.zip" "${ARCHIVE_PATH}"
 
 mkdir -p "${EXPORT_PATH}"

@@ -208,9 +208,9 @@ jobs:
         with:
           bundler-cache: true
 
-      - name: Install Fastlane, Mint
+      - name: Install ldid, Mint
         run: |
-          brew install mint
+          brew install mint ldid
 
       - name: Install Mint packages
         if: steps.mint-cache.outputs.cache-hit != 'true'
