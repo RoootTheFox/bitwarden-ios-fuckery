@@ -33,15 +33,15 @@ xcrun xcodebuild archive \
   -configuration Release \
   -archivePath "${ARCHIVE_PATH}" \
   | xcbeautify --renderer github-actions
-echo ""
-  CODE_CODE_SIGN_IDENTITY="iPhone Developer" \
-  CODE_CODE_SIGNING_REQUIRED=NO \
-  -project Bitwarden.xcodeproj \
-  -scheme Bitwarden \
-  -configuration Release \
-  -archivePath "${ARCHIVE_PATH}" \
-  | xcbeautify --renderer github-actions
-echo ""
+#echo ""
+#  CODE_CODE_SIGN_IDENTITY="iPhone Developer" \
+#  CODE_CODE_SIGNING_REQUIRED=NO \
+#  -project Bitwarden.xcodeproj \
+#  -scheme Bitwarden \
+#  -configuration Release \
+#  -archivePath "${ARCHIVE_PATH}" \
+#  | xcbeautify --renderer github-actions
+#echo ""
 
 echo "📦 Performing Xcode archive export"
 xcrun xcodebuild -exportArchive \
