@@ -32,6 +32,7 @@ xcrun xcodebuild archive \
   -scheme Bitwarden \
   -configuration Release \
   -archivePath "${ARCHIVE_PATH}" \
+  -exportArchive \
   -exportOptionsPlist meow.plist \
   | xcbeautify --renderer github-actions
 echo ""
