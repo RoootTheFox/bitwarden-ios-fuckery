@@ -32,7 +32,6 @@ xcrun xcodebuild archive \
   -scheme Bitwarden \
   -configuration Release \
   -archivePath "${ARCHIVE_PATH}" \
-  -exportArchive \
   | xcbeautify --renderer github-actions
 echo ""
   CODE_CODE_SIGN_IDENTITY="iPhone Developer" \
