@@ -91,7 +91,7 @@
 	<key>ITSEncryptionExportComplianceCode</key>
 	<string>ecf076d3-4824-4d7b-b716-2a9a47d7d296</string>
 	<key>MinimumOSVersion</key>
-	<string>15.0</string>
+	<string>14.2</string>
 	<key>NFCReaderUsageDescription</key>
 	<string>Use Yubikeys for two-factor authentication.</string>
 	<key>NSCameraUsageDescription</key>

@@ -8,7 +8,7 @@ configs:
 options:
   createIntermediateGroups: true
   deploymentTarget:
-    iOS: 15.0
+    iOS: 14.2
     watchOS: 8.0
   groupSortPosition: top
   usesTabs: false
