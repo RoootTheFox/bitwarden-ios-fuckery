@@ -43,30 +43,16 @@ xcrun xcodebuild archive \
 #  | xcbeautify --renderer github-actions
 #echo ""
 
-echo "📦 Performing Xcode archive export"
-xcrun xcodebuild -exportArchive \
-  CODE_CODE_SIGN_IDENTITY="iPhone Developer" \
-  CODE_CODE_SIGNING_REQUIRED=NO \
-  -archivePath "${ARCHIVE_PATH}" \
-  -project Bitwarden.xcodeproj \
-  -scheme Bitwarden \
-  -configuration Release \
-  | xcbeautify --renderer github-actions
-echo ""
-
-echo "📦 Performing Xcode archive export"
-xcrun xcodebuild -exportArchive \
-  CODE_CODE_SIGN_IDENTITY="iPhone Developer" \
-  CODE_CODE_SIGNING_REQUIRED=NO \
-  -archivePath "${ARCHIVE_PATH}" \
 
 #  -exportOptionsPlist "Configs/export_options.plist" \
 #  -exportOptionsPlist meow.plist \
+echo "📦 Performing Xcode archive export"
 xcrun xcodebuild -exportArchive \
   CODE_CODE_SIGN_IDENTITY="iPhone Developer" \
   CODE_CODE_SIGNING_REQUIRED=NO \
   -archivePath "${ARCHIVE_PATH}" \
   -exportPath "${EXPORT_PATH}" \
+  -exportOptionsPlist "Configs/export_options.plist" \
   | xcbeautify --renderer github-actions
 
 echo "🎉 Build complete"
