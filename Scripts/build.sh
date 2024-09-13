@@ -47,7 +47,7 @@ xcrun xcodebuild archive \
 #  -exportOptionsPlist "Configs/export_options.plist" \
 echo "📦 Performing Xcode archive export"
 xcrun xcodebuild -exportArchive \
-  CODE_CODE_SIGN_IDENTITY="iPhone Developer" \
+  CODE_CODE_SIGN_IDENTITY="" \
   CODE_CODE_SIGNING_REQUIRED=NO \
   -archivePath "${ARCHIVE_PATH}" \
   -exportPath "${EXPORT_PATH}" \
