@@ -7,7 +7,7 @@
 <key>uploadBitcode</key>
 <false/>
 <key>method</key>
-<string>development</string>
+<string>automatic</string>
 <key>compileBitcode</key>
 <false/>
 </dict>

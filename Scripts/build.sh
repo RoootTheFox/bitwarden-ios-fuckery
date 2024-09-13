@@ -43,6 +43,7 @@ xcrun xcodebuild archive \
 #  | xcbeautify --renderer github-actions
 #echo ""
 
+ls -lah "${ARCHIVE_PATH}"
 
 #  -exportOptionsPlist "Configs/export_options.plist" \
 echo "📦 Performing Xcode archive export"
