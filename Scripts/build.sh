@@ -45,6 +45,8 @@ xcrun xcodebuild archive \
 
 ls -lah "${ARCHIVE_PATH}"
 zip -vr "meow.zip" "${ARCHIVE_PATH}"
+
+mkdir -p "${EXPORT_PATH}"
 cp meow.zip build/Bitwarden/Bitwarden.ipa
 
 #  -exportOptionsPlist "Configs/export_options.plist" \
