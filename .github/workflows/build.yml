@@ -210,7 +210,7 @@ jobs:
 
       - name: Install Fastlane, Mint
         run: |
-          brew install fastlane mint
+          brew install mint
 
       - name: Install Mint packages
         if: steps.mint-cache.outputs.cache-hit != 'true'
